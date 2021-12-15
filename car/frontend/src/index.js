@@ -12,8 +12,8 @@ ReactDOM.render(
     
     <Provider store={store}>
           <Helmet>
-                <title>mymmr.kr</title>
-                <meta name="description" content="0isohee" data-react-helmet="true"/>
+                <title>팔복자동차공업사</title>
+                <meta name="description" content="팔복자동차공업사" data-react-helmet="true"/>
 
         <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8.1/dist/polyfill.min.js"></script>
