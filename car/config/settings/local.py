@@ -11,7 +11,7 @@ SECRET_KEY = env(
     default="H7ahoZnIcloTtjr7sXFFlqVdf7ZuhMCleIcXpKkw9tVcodyTQaLaEUyhG4LYc2to",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1","52.78.187.229",'.pbcar.co.kr','.ap-northeast-2.compute.amazonaws.com']
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1","52.78.187.229",'.pbcar.co.kr','www.pbcar.co.kr','.ap-northeast-2.compute.amazonaws.com']
 
 # CACHES
 # ------------------------------------------------------------------------------
