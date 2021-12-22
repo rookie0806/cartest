@@ -4,21 +4,13 @@ from selenium.webdriver.chrome.options import Options
 import chromedriver_autoinstaller
 from selenium.webdriver.common.keys import Keys
 import time
-option = Options()
-option.add_argument("app-version=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.75 Safari/537.36")
-chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]
-try:
-    driver = webdriver.Chrome(f'./{chrome_ver}/chromedriver.exe', options=option)
-except:
-    chromedriver_autoinstaller.install(True)
-    driver = webdriver.Chrome(f'./{chrome_ver}/chromedriver.exe', options=option)
+from selenium import webdriver 
+from pyvirtualdisplay import Display 
+display = Display(visible=0, size=(1920, 1080)) 
+display.start() 
+path='/srv/car/chromedriver' 
+driver = webdriver.Chrome(path)
 
-chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]
-try:
-    driver = webdriver.Chrome(f'./{chrome_ver}/chromedriver.exe', options=option)
-except:
-    chromedriver_autoinstaller.install(True)
-    driver = webdriver.Chrome(f'./{chrome_ver}/chromedriver.exe', options=option)
 driver.get("https://www.dropbox.com/login?cont=https%3A%2F%2Fwww.dropbox.com%2Fhome")
 id = driver.find_elements_by_class_name("text-input-input")[0]
 id.send_keys("pbcar@naver.com")
