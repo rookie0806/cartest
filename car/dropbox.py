@@ -43,4 +43,4 @@ while True:
     key = Key.objects.get()
     key.key = token
     key.save()
-    time.sleep(60)
+    time.sleep(1800)
