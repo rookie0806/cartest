@@ -79,3 +79,16 @@ class find(APIView):
         except:
             res = {"err":"can't find"}
             return Response(data=res,status=status.HTTP_400_BAD_REQUEST)      
+
+class set(APIView):
+    @csrf_exempt
+    def dispatch(self, request, *args, **kwargs):
+       return super(set, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request, format=None):
+        data = request.data["key"]
+        print(data)
+        key = models.Key.objects.get()
+        key.key = data
+        key.save()
+        return Response(status=status.HTTP_200_OK)    

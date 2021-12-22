@@ -6,6 +6,22 @@ from selenium.webdriver.common.keys import Keys
 import time
 from selenium import webdriver 
 from pyvirtualdisplay import Display 
+import requests
+from bs4 import BeautifulSoup, SoupStrainer
+import re
+import requests
+import urllib
+import os
+from io import BytesIO
+import time
+from urllib.parse import urlparse
+from uuid import uuid4
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
+import django
+import cv2
+django.setup()
+from car.repair.models import Key
+
 display = Display(visible=0, size=(1920, 1080)) 
 display.start() 
 path='/srv/car/chromedriver' 
@@ -19,8 +35,12 @@ pw.send_keys("han7980")
 pw.send_keys(Keys.ENTER)
 time.sleep(5)
 driver.implicitly_wait(10)
-driver.get("https://dropbox.github.io/dropbox-api-v2-explorer/#files_search_v2")
-btn = driver.find_elements_by_class_name("align-right")[0].find_elements_by_tag_name("button")[0].click()
-time.sleep(3)
-token = driver.find_element_by_id("token-input").get_attribute('value')
-print(token)
+while True:
+    driver.get("https://dropbox.github.io/dropbox-api-v2-explorer/#files_search_v2")
+    btn = driver.find_elements_by_class_name("align-right")[0].find_elements_by_tag_name("button")[0].click()
+    time.sleep(3)
+    token = driver.find_element_by_id("token-input").get_attribute('value')
+    key = Key.objects.get()
+    key.key = token
+    key.save()
+    time.sleep(60)
