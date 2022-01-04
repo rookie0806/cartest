@@ -12,6 +12,7 @@ class Container extends Component {
       data : null,
       warning : false,
       image : [],
+      wait : false,
   };
   static propTypes = {
     find : PropTypes.func.isRequired,
@@ -47,6 +48,9 @@ class Container extends Component {
     const { cn} = this.state;
     const { find } = this.props;
     event.preventDefault();
+    this.setState({
+      wait: true,
+    });
     find(cn);
     console.log("dd")
     

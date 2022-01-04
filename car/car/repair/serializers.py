@@ -13,8 +13,6 @@ class RepairSerializer(serializers.ModelSerializer):
         model = models.Repair
         fields = (
             'car_number',
-            'phone_number',
-            'date',
             'repairImg',
         )
 

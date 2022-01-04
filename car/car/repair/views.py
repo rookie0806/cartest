@@ -31,7 +31,7 @@ class find(APIView):
             }
             print(headers)
             data = {
-                "query": cn,#+"_"+pn,
+                "query": cn+"(",#+"_"+pn,
                 "match_field_options": {"include_highlights":True},
                 "options": {"path":"/pbcar","filename_only":False},
             }
@@ -41,12 +41,12 @@ class find(APIView):
             for i in range(0,len(r.json()['matches'])):
                 print(r.json()['matches'][i]['metadata']['metadata']['path_lower'])
                 try:
-                    repair = models.Repair.objects.get(Q(car_number=cn) & Q(date=r.json()['matches'][i]['metadata']['metadata']['path_lower'].split('_')[1]))
+                    repair = models.Repair.objects.get(car_number=cn)
                 except models.Repair.DoesNotExist:
-                    repair = models.Repair.objects.create(car_number=cn,date=r.json()['matches'][i]['metadata']['metadata']['path_lower'].split('_')[1])
+                    repair = models.Repair.objects.create(car_number=cn)
                     repair.save()
                 data = {
-                    "query": ".png",
+                    "query": ".jpg",
                     "match_field_options": {"include_highlights":True},
                     "options": {"path":r.json()['matches'][i]['metadata']['metadata']['path_lower'],"filename_only":False},
                 }
@@ -70,7 +70,8 @@ class find(APIView):
                         img = models.img.objects.create(path=r2.json()['matches'][j]['metadata']['metadata']['path_lower'],img_url=img_url,repair=repair)
                         img.save()
             repairs = models.Repair.objects.filter(Q(car_number=cn))
-            if(len(repairs)>0):
+            img = models.img.objects.filter(Q(repair__car_number=cn))
+            if(len(img)>0):
                 serializer = serializers.RepairSerializer(repairs,many=True)
                 return Response(data=serializer.data, status=status.HTTP_200_OK) 
             else:    

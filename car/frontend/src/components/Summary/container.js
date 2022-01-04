@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import MSummary from "./presenter";
+import Summary from "./presenter";
 import $ from "jquery";
 class Container extends Component {
 
@@ -12,6 +12,7 @@ class Container extends Component {
       data : null,
       warning : false,
       image : [],
+      wait : false,
   };
   static propTypes = {
     find : PropTypes.func.isRequired,
@@ -47,6 +48,9 @@ class Container extends Component {
     const { cn} = this.state;
     const { find } = this.props;
     event.preventDefault();
+    this.setState({
+      wait: true,
+    });
     find(cn);
     console.log("dd")
     
@@ -85,7 +89,7 @@ class Container extends Component {
   render() {
     
     return (
-      <MSummary {...this.state} selectOnChange={this.selectOnChange} handleSubmit={this._handleSubmit} handleInputChange={this._handleInputChange}onKeyPress={this.onKeyPress}  onClick={this.onClick} />
+      <Summary {...this.state} selectOnChange={this.selectOnChange} handleSubmit={this._handleSubmit} handleInputChange={this._handleInputChange}onKeyPress={this.onKeyPress}  onClick={this.onClick} />
       
     );
     

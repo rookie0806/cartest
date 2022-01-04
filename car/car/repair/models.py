@@ -2,10 +2,8 @@ from django.db import models
 
 class Repair(models.Model):
     car_number = models.CharField(max_length=50,default="")
-    phone_number = models.CharField(max_length=50,default="")
-    date =  models.CharField(max_length=50,default="")
     def __str__(self):
-        return '[{}] - {} - {}'.format(self.car_number, self.phone_number, self.date)
+        return '{}'.format(self.car_number)
 
 class img(models.Model):
     path = models.CharField(max_length=100,default="")

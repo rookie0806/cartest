@@ -21,13 +21,9 @@ class RepairAdmin(admin.ModelAdmin):
 
     search_fields = (
         'car_number',
-        'phone_number',
-        'date',
     )
     list_display = (
         'car_number',
-        'phone_number',
-        'date',
     )
 
 

@@ -20,31 +20,23 @@ const MSummary = (props, context) => (
           {props.warning && (
             <span className={styles.warning}>해당하는 수리내역을 찾을 수 없습니다.</span>
           )}
+          {!props.warning && props.wait && (
+            <span className={styles.warning}>조회 중입니다.</span>
+          )}
           </>
           )
         }
         {!props.loading && (
           <>
-          <div className={styles.selectBox}>
-          <label className={styles.selecttext}>수리 일자 선택</label>
-          <select className={styles.selectDate} onChange={props.selectOnChange}>
-              {props.data.map((data,i) => (
-                <option
-                  key={i}
-                  value={i}
-                >
-                  {data.date}
-                </option>
-              ))}
-          </select>
-          </div>
+          
           <div className={styles.imageBox}>
             {props.show && (
               <SimpleImageSlider
               width={300}
               height={200}
               images={props.image}
-              showBullets={true}
+              showBullets={false}
+              showNavs={true}
               loop={true}
               autoPlay={true}
               slideDuration={0.5}
@@ -75,6 +67,7 @@ MSummary.propTypes = {
   selectOnChange:PropTypes.func.isRequired,
   handleSubmit:PropTypes.func.isRequired,
   show:PropTypes.bool.isRequired,
+  wait :PropTypes.bool.isRequired,
 };
 
 export default MSummary;
